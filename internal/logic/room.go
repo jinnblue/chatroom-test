@@ -283,9 +283,11 @@ func RoomAdmin() *RoomManager {
 	return rm
 }
 
-func init() {
-	abPath := pathmap.GetCurrentAbPath()
-	cfgPath := filepath.Join(abPath, "../../", DEFAULT_FILTER_FILE)
-	trie = acascii.NewACTrieFromFile(cfgPath)
-	log.Println("actrie load black words from:", cfgPath)
+func InitActrie(cfgpath string) {
+	if cfgpath == "" {
+		abPath := pathmap.GetCurrentAbPath()
+		cfgpath = filepath.Join(abPath, "../../", DEFAULT_FILTER_FILE)
+	}
+	trie = acascii.NewACTrieFromFile(cfgpath)
+	log.Println("actrie load black words from:", cfgpath)
 }

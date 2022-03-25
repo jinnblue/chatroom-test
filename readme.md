@@ -4,7 +4,7 @@
 
 ```bash
 # 启动服务器
-go run ./cmd/server/main.go
+go run ./cmd/server/main.go --addr "0.0.0.0:20000" --config ".\internal\data\list.txt"
 ```
 
 ```bash

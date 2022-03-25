@@ -18,15 +18,18 @@ import (
 
 var (
 	addr      string
+	cfgPath   string
 	srvHandle tcp.Handler
 	srvParser tcp.PacketParser
 )
 
 func main() {
 	flag.StringVar(&addr, "addr", "0.0.0.0:20000", "IP:Port address of chatrooms listen on.")
+	flag.StringVar(&cfgPath, "config", "", "config path of blackwords.")
 	flag.Parse()
 
-	fmt.Println("chatrooms server start on:", addr)
+	logic.InitActrie(cfgPath)
+	fmt.Printf("chatrooms server start on:%s \n", addr)
 
 	f, _ := os.OpenFile("cpu.pprof", os.O_CREATE|os.O_RDWR, 0644)
 	defer f.Close()
