@@ -9,6 +9,7 @@ import (
 	"errors"
 	"io"
 	"os"
+	"unsafe"
 )
 
 type Words []byte
@@ -144,6 +145,10 @@ func (ac *ACTrie) AddKeyWord(word Words) error {
 	return nil
 }
 
+func Bytes2String(b []byte) string {
+	return *(*string)(unsafe.Pointer(&b))
+}
+
 // Filter 将字符串中匹配到的Words替换为 "*"
 func (ac *ACTrie) Filter(input string) string {
 	if !ac.checkFailuresCreated() {
@@ -188,7 +193,8 @@ func (ac *ACTrie) Filter(input string) string {
 		symbolPre = false
 	}
 
-	return string(word)
+	// return string(word)
+	return Bytes2String(word)
 }
 
 // HasBlackWord 判断字符串中是否包含Words

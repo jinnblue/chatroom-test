@@ -301,6 +301,26 @@ func BenchmarkAC2Byte(b *testing.B) {
 	retHas = has
 }
 
+var retClean string
+
+func BenchmarkFilter1(b *testing.B) {
+	var clean string
+	for i := 0; i < b.N; i++ {
+		clean = trie1.Filter(inStr)
+	}
+	retClean = clean
+	// fmt.Println("BenchmarkFilter1:", retClean)
+}
+
+func BenchmarkFilter2(b *testing.B) {
+	var clean string
+	for i := 0; i < b.N; i++ {
+		clean = trie2.Filter(inStr)
+	}
+	retClean = clean
+	// fmt.Println("BenchmarkFilter2:", retClean)
+}
+
 func ExampleACTrie_HasBlackWord() {
 	trie, _ := NewACTrieFromStrings([]string{"Superman", "uperman", "perman", "erman"})
 	has := trie.HasBlackWord("The Man Of Steel: Superman")
